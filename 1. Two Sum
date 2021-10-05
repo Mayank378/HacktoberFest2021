@@ -1,20 +1,69 @@
 class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> a;
-        for(int i=0;i<nums.size();i++)
-        {
-            for(int j=i+1;j<nums.size();j++)
+    public int[] twoSum(int[] nums, int target) {
+      int temp[] = nums.clone();
+      Arrays.sort(temp);
+      int firstNum = 0;
+      int secNum = 0;
+      int i = 0;
+      int j = nums.length-1;
+      while(i<j)
+      {
+            if(temp[i]+temp[j]==target)
             {
-                if(nums[i]+nums[j]==target)
-                {
-                    a.push_back(i);
-                    a.push_back(j);
-                    i=nums.size();
-                    break;
-                }
+                firstNum = temp[i];
+                secNum = temp[j];
+                break;
             }
-        }
-        return a;
+            else if(temp[i]+temp[j]>target)
+            {
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+      }
+      int ans[] = new int[2];
+      if(firstNum==secNum)
+      {
+            int flag = 0;
+            for(int m = 0; m<nums.length;m++)
+            {
+                if(nums[m]==firstNum&&flag==0)
+                {
+                    ans[0] = m;
+                    nums[m] = Integer.MIN_VALUE;
+                    flag++;
+                    continue;
+                }
+                if(nums[m]==secNum)
+                {
+                    ans[1] = m;
+
+                }
+        
+    
+            }
+
+
+      }
+      else
+      {
+      for(int m = 0; m<nums.length;m++)
+      {
+            if(nums[m]==firstNum)
+            {
+                ans[0] = m;
+            }
+            else if(nums[m]==secNum)
+            {
+                ans[1] = m;
+            }
+            else
+            {}
+      }
+      }
+     return ans;
+     
     }
-};
+}
